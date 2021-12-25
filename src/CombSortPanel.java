@@ -1,6 +1,7 @@
+
+
 import java.awt.Color;
 import java.awt.Graphics;
-
 
 public class CombSortPanel extends SortPanel {
     private static final long serialVersionUID = 1L;
@@ -13,7 +14,7 @@ public class CombSortPanel extends SortPanel {
     }
 
     @Override
-    public void reset(){
+    public void reset() {
         redColumn = -1;
         blueColumn = -1;
         greenColumn = -1;
@@ -22,6 +23,7 @@ public class CombSortPanel extends SortPanel {
     @Override
     public void run() {
         try {
+
             int gap = list.length;
             boolean swapped = true;
             boolean sorted = true;
@@ -41,9 +43,9 @@ public class CombSortPanel extends SortPanel {
                         list[i + gap] = t;
                         repaint();
                         Thread.sleep(4 * sleepTime);
-                        swapped = True;
+                        swapped = true;
                     }
-                    if ((sorted) && (i > 0)) {
+                    if((sorted) && (i > 0)) {
                         if (list[i] > list[i - 1]) {
                             greenColumn = i;
                         } else {
@@ -58,10 +60,10 @@ public class CombSortPanel extends SortPanel {
             blueColumn = -1;
             greenColumn = size - 1;
         } catch (InterruptedException e) {
-
         }
         repaint();
     }
+
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -94,4 +96,3 @@ public class CombSortPanel extends SortPanel {
     }
 
 }
-

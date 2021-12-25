@@ -1,3 +1,5 @@
+
+
 import java.awt.Color;
 import java.awt.Graphics;
 
@@ -7,43 +9,43 @@ public class CocktailSortPanel extends SortPanel {
     private int greenColumn1 = -1;
     private int greenColumn2 = -1;
 
-    public CocktailSortPanel (String name, int sleepTime, int width, int height) {
+    public CocktailSortPanel(String name, int sleepTime, int width, int height) {
         super(name, sleepTime, width, height);
     }
 
     @Override
-    public void reset(){
+    public void reset() {
         redColumn = -1;
         greenColumn1 = -1;
         greenColumn2 = -1;
-
     }
+
     @Override
     public void run() {
-        try{
+        try {
             boolean swapped = true;
             int i = 0;
-            int j = list.length = -1;
-            while ( i < j && swapped) {
+            int j = list.length - 1;
+            while (i < j && swapped) {
                 swapped = false;
-                for(int k = i; k < j; k++) {
+                for (int k = i; k < j; k++) {
                     redColumn = k;
                     repaint();
                     Thread.sleep(4 * sleepTime);
-                    if (list[k] > list[k+1]) {
-                        reapint();
+                    if (list[k] > list[k + 1]) {
+                        repaint();
                         Thread.sleep(4 * sleepTime);
                         int temp = list[k];
-                        list[k] = list[k+ 1];
+                        list[k] = list[k + 1];
                         list[k + 1] = temp;
                         swapped = true;
                     }
                 }
                 greenColumn2 = j;
                 j--;
-                if(swapped) {
+                if (swapped) {
                     swapped = false;
-                    for(int k = j; k > i; k--) {
+                    for (int k = j; k > i; k--) {
                         redColumn = k;
                         repaint();
                         Thread.sleep(4 * sleepTime);
@@ -51,25 +53,22 @@ public class CocktailSortPanel extends SortPanel {
                             repaint();
                             Thread.sleep(4 * sleepTime);
                             int temp = list[k];
-                            list[k] = list[k +1];
-                            list[k+1] = temp;
+                            list[k] = list[k - 1];
+                            list[k - 1] = temp;
                             swapped = true;
                         }
                     }
                 }
-
                 i++;
                 greenColumn1 = i;
             }
             redColumn = -1;
             greenColumn1 = greenColumn2;
-
-
         } catch (InterruptedException e) {
-
         }
         repaint();
     }
+
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
